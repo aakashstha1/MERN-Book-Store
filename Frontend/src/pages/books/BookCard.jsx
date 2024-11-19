@@ -7,22 +7,20 @@ function BookCard({ book }) {
     <div className=" rounded-lg transition-shadow duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
         <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
-          <Link to={"/"}>
-            <img
-              src={`${getImgUrl(book?.coverImage)}`}
-              alt=""
-              className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
-            />
-          </Link>
+          <img
+            src={`${getImgUrl(book?.coverImage)}`}
+            alt={book?.title}
+            className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
+          />
         </div>
 
         <div>
           <Link to={`/books/${book?._id}`}>
-            <h3 className="text-xl font-semibold hover:text-blue-600 mb-3">
+            <h3 className="text-md font-semibold hover:text-blue-600 mb-3">
               {book?.title}
             </h3>
           </Link>
-          <p className="text-gray-600 mb-5">
+          <p className="text-sm text-gray-600 mb-5">
             {book?.description.length > 80
               ? `${book?.description.slice(0, 80)}...`
               : book?.description}
@@ -33,9 +31,9 @@ function BookCard({ book }) {
               ${book?.oldPrice}
             </span>
           </p>
-          <button className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
-            <FiShoppingCart className="" />
-            <span>Add to Cart</span>
+          <button className="btn-cart flex items-center gap-3 ">
+            <FiShoppingCart className="size-5" />
+            <span className="text-sm">Add to Cart</span>
           </button>
         </div>
       </div>

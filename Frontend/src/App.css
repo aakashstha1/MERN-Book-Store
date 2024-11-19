@@ -35,6 +35,10 @@
   @apply bg-primary  px-12 py-2 rounded-md text-base font-secondary font-bold hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer;
 }
 
+.btn-cart {
+  @apply bg-primary  px-5 py-2 rounded-md text-base font-secondary font-semibold hover:bg-secondary hover:text-white transition-all duration-200 cursor-pointer;
+}
+
 .html {
   scroll-behavior: smooth;
 }
