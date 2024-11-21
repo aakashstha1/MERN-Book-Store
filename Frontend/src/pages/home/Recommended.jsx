@@ -42,9 +42,9 @@ function Recommended() {
         className="mySwiper"
       >
         {books.length > 0 &&
-          books.slice(8, 16).map((book, index) => (
+          books.slice(8, 16).map((product, index) => (
             <SwiperSlide key={index}>
-              <BookCard book={book} />
+              <BookCard product={product} />
             </SwiperSlide>
           ))}
       </Swiper>

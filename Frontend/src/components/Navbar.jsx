@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
@@ -6,6 +6,7 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import avatarImg from "../assets/avatar.png";
+import { useSelector } from "react-redux";
 
 const navigation = [
   {
@@ -29,6 +30,21 @@ const navigation = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const user = true;
+  // Counter for item in cart
+  const cartItems = useSelector((state) => state.cart.cartItems) || [];
+  console.log(cartItems);
+  // Close dropdown when click outside
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!dropdownRef.current?.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
   return (
     <header className="max-w-screen-xl mx-auto px-4 py-6">
       <nav className="flex justify-between items-center">
@@ -50,7 +66,7 @@ function Navbar() {
 
         {/* right side  */}
         <div className="relative flex items-center md:space-x-5 space-x-3">
-          <div>
+          <div ref={dropdownRef}>
             {user ? (
               <>
                 <button onClick={() => setIsOpen(!isOpen)}>
@@ -94,7 +110,13 @@ function Navbar() {
             className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-md"
           >
             <IoCartOutline className="size-6" />
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            {cartItems.length > 0 ? (
+              <span className="text-sm font-semibold sm:ml-1">
+                {cartItems.length}
+              </span>
+            ) : (
+              <span className="text-sm font-semibold sm:ml-1">0</span>
+            )}
           </Link>
         </div>
       </nav>

@@ -78,9 +78,9 @@ function TopSellers() {
         className="mySwiper"
       >
         {filteredBooks.length > 0 &&
-          filteredBooks.map((book, index) => (
+          filteredBooks.map((product, index) => (
             <SwiperSlide key={index}>
-              <BookCard book={book} />
+              <BookCard product={product} />
             </SwiperSlide>
           ))}
       </Swiper>
