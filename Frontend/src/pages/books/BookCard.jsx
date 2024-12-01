@@ -3,12 +3,13 @@ import { FiShoppingCart } from "react-icons/fi";
 import { getImgUrl } from "../../utils/getImgUrl";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 function BookCard({ product }) {
   const dispatch = useDispatch();
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
+
   return (
     <div className=" rounded-lg transition-shadow duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
@@ -23,7 +24,7 @@ function BookCard({ product }) {
         <div>
           <Link to={`/books/${product?._id}`}>
             <h3 className="text-md font-semibold hover:text-blue-600 mb-3">
-              {product?.title}
+              {product?.title || "untitled"}
             </h3>
           </Link>
           <p className="text-sm text-gray-600 mb-5">
