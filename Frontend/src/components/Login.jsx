@@ -1,19 +1,40 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContex";
 
 function Login() {
   const [message, setMessage] = useState("");
+  const { loginUser, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await loginUser(data.email, data.password);
+      alert("Login succesfully!");
+      navigate("/");
+    } catch (error) {
+      setMessage("Please provide a valid email and password");
+      console.log(error);
+    }
+  };
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      alert("Login succesfull!");
+      navigate("/");
+    } catch (error) {
+      setMessage("Google sign in failed!");
+      console.log(error);
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -54,7 +75,7 @@ function Login() {
           </div>
           {message && (
             <p className="text-red-500 text-sm italic mb-3 text-center">
-              * ${message} *
+              {message}
             </p>
           )}
           <div>

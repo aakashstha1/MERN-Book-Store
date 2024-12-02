@@ -7,6 +7,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import avatarImg from "../assets/avatar.png";
 import { useSelector } from "react-redux";
+import { useAuth } from "../context/AuthContex";
 
 const navigation = [
   {
@@ -29,7 +30,13 @@ const navigation = [
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const user = true;
+
+  const { currentUser, logout } = useAuth();
+
+  const handleLogOut = () => {
+    logout();
+  };
+
   // Counter for item in cart
   const cartItems = useSelector((state) => state.cart.cartItems) || [];
   console.log(cartItems);
@@ -67,14 +74,14 @@ function Navbar() {
         {/* right side  */}
         <div className="relative flex items-center md:space-x-5 space-x-3">
           <div ref={dropdownRef}>
-            {user ? (
+            {currentUser ? (
               <>
                 <button onClick={() => setIsOpen(!isOpen)}>
                   <img
                     src={avatarImg}
                     alt=""
                     className={`size-7 rounded-full  ${
-                      user ? "ring-2 ring-blue-500" : ""
+                      currentUser ? "ring-2 ring-blue-500" : ""
                     }`}
                   />
                 </button>
@@ -92,6 +99,14 @@ function Navbar() {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button
+                          onClick={handleLogOut}
+                          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-400"
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
