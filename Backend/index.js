@@ -5,6 +5,7 @@ const app = express();
 const connectDB = require("./db/conn");
 const PORT = process.env.PORT || 5000;
 const bookRoutes = require("./src/books/book.route");
+const orderRoutes = require("./src/orders/order.route");
 
 //middleware
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(
 connectDB();
 
 app.use("/api/books", bookRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
