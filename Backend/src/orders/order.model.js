@@ -32,18 +32,20 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    productIds: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Book",
-      required: true,
-    },
+    productIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Book",
+        required: true,
+      },
+    ],
     totalPrice: {
       type: Number,
       required: true,
     },
   },
   {
-    timestamps: true,  
+    timestamps: true,
   }
 );
 

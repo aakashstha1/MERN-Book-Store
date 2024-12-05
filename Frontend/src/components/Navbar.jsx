@@ -16,7 +16,7 @@ const navigation = [
   },
   {
     name: "Orders",
-    href: "/order",
+    href: "/orders",
   },
   {
     name: "Cart Page",

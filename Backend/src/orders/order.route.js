@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Order = require("./order.model");
 
-const { createAOrder } = require("./order.controller");
+const { createAOrder, getOrderByEmail } = require("./order.controller");
 
-//Post a book
+//Create an Order
 router.post("/", createAOrder);
 
-// //Get all books
-// router.get("/", getAllBooks);
+//Get orders by user email  
+router.get("/email/:email", getOrderByEmail);
 
 // //Get a single book
 // router.get("/:id", getSingleBook);

@@ -12,16 +12,20 @@ const createAOrder = async (req, res) => {
   }
 };
 
-// //Get all books
-// const getAllBooks = async (req, res) => {
-//   try {
-//     const books = await Book.find().sort({ createdAt: -1 });
-//     res.status(200).send(books);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({ message: "Failed to fetch books" });
-//   }
-// };
+//Get orders by user email
+const getOrderByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const orders = await Order.find({ email }).sort({ createdAt: -1 });
+    if (!orders) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to fetch order" });
+  }
+};
 
 // //Get single book
 // const getSingleBook = async (req, res) => {
@@ -78,7 +82,7 @@ const createAOrder = async (req, res) => {
 
 module.exports = {
   createAOrder,
-  //   getAllBooks,
+  getOrderByEmail,
   //   getSingleBook,
   //   updateBook,
   //   deleteBook,
