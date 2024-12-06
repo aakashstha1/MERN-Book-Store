@@ -9,9 +9,10 @@ const {
   updateBook,
   deleteBook,
 } = require("./book.controller");
+const verifyAdminToken = require("../middlewares/verifyAdminToken");
 
 //Post a book
-router.post("/create-book", postABook);
+router.post("/create-book", verifyAdminToken, postABook);
 
 //Get all books
 router.get("/", getAllBooks);
@@ -20,9 +21,9 @@ router.get("/", getAllBooks);
 router.get("/:id", getSingleBook);
 
 //Update a book
-router.put("/edit/:id", updateBook);
+router.put("/edit/:id", verifyAdminToken, updateBook);
 
 //Delete a book
-router.delete("/:id", deleteBook);
+router.delete("/:id", verifyAdminToken, deleteBook);
 
 module.exports = router;
