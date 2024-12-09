@@ -31,7 +31,7 @@ const booksApi = createApi({
     addBook: builder.mutation({
       //'mutation' for post method and 'query' for grt
       query: (newBook) => ({
-        url: `/create-boook`,
+        url: `/create-book`,
         method: "POST",
         body: newBook,
       }), // Endpoint path for fetching all books
